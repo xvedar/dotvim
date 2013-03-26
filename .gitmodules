@@ -7,3 +7,6 @@
 [submodule "bundle/vim-lucius"]
 	path = bundle/vim-lucius
 	url = https://github.com/jonathanfilip/vim-lucius.git
+[submodule "bundle/molokai"]
+	path = bundle/molokai
+	url = https://github.com/tomasr/molokai.git
