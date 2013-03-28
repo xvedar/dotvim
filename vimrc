@@ -26,39 +26,26 @@ if executable('xkb-switch')
     autocmd InsertLeave * call <SID>xkb_switch(0)
 endif
 
-" skeletons
-function! SKEL_spec()
-	0r /usr/share/vim/current/skeletons/skeleton.spec
-	language time en_US
-	if $USER != ''
-	    let login = $USER
-	elseif $LOGNAME != ''
-	    let login = $LOGNAME
-	else
-	    let login = 'unknown'
-	endif
-	let newline = stridx(login, "\n")
-	if newline != -1
-	    let login = strpart(login, 0, newline)
-	endif
-	if $HOSTNAME != ''
-	    let hostname = $HOSTNAME
-	else
-	    let hostname = system('hostname -f')
-	    if v:shell_error
-		let hostname = 'localhost'
-	    endif
-	endif
-	let newline = stridx(hostname, "\n")
-	if newline != -1
-	    let hostname = strpart(hostname, 0, newline)
-	endif
-	exe "%s/specRPM_CREATION_DATE/" . strftime("%a\ %b\ %d\ %Y") . "/ge"
-	exe "%s/specRPM_CREATION_AUTHOR_MAIL/" . login . "@" . hostname . "/ge"
-	exe "%s/specRPM_CREATION_NAME/" . expand("%:t:r") . "/ge"
-	setf spec
-endfunction
-autocmd BufNewFile	*.spec	call SKEL_spec()
+" command -nargs=1 Inshtml :normal i You text1 text2 <args><ESC>
+" Inshtml blah
+
+"function Varg2(foo, ...)
+"  a:foo, a:0, - arguments
+"  echom a:foo " display foo value
+"  echom a:0   " display the number of extra arguments you were given
+"  echom a:1   " display each extra argument
+"  echo a:000  " will be set to a list containing all the extra arguments that were passed
+"  let foo_tmp = a:foo " assignment
+"endfunction
+
+"func! InsertHeader()
+"	r~/dotvim/1.txt
+"	normal! i text1 text3
+"	command! i <cr>sdfsdf<cr> 
+"endf
+
+" normal mode nonrecursive mapping
+"nnoremap <F2> :call InsertHeader()<CR>
 
 " pathogen
 filetype off
@@ -93,6 +80,8 @@ syntax on
 
 " hightlight search pattern
 set hlsearch
+
+set scrolloff=3 " number of lines before/after cursor while up/down
 
 " to use command mode while russian keyboard on
 " edit mode only
@@ -142,7 +131,7 @@ if has("gui_running")
     menu Font.Monospace10      :set guifont=Monospace\ 10<CR>
     menu Font.Monospace11      :set guifont=Monospace\ 11<CR>
 
-    map <F12> :emenu Font.<Tab>
+    noremap <F12> :emenu Font.<Tab>
 
 else
 	"colorscheme darkblue
@@ -164,26 +153,26 @@ set ruler
 if bufwinnr(1)
   
   " press '+' key
-  map + <C-W>+
+  noremap + <C-W>+
   " press '-' key
-  map - <C-W>-
+  noremap - <C-W>-
   " the same functionality as two lines above
-  "map <kPlus> <C-W>+
-  "map <kMinus> <C-W>-
+  "noremap <kPlus> <C-W>+
+  "noremap <kMinus> <C-W>-
   
   " Ctrl+k - move cursor window up
-  map <C-K> <C-W>k<C-W>_
+  noremap <C-K> <C-W>k<C-W>_
   " Ctrl+j - move cursor window dn
-  map <C-J> <C-W>j<C-W>_
-"  map <kDivide> <c-w><
-"  map <kMultiply> <c-w>>
-"  map <kDivide> <c-w><
-"  map <kMultiply> <c-w>>
+  noremap <C-J> <C-W>j<C-W>_
+"  noremap <kDivide> <c-w><
+"  noremap <kMultiply> <c-w>>
+"  noremap <kDivide> <c-w><
+"  noremap <kMultiply> <c-w>>
 endif
 
-"map <Up> <c-w>k<c-w>_<c-w><Bar>
-"map <Down> <c-w>j<c-w>_<c-w><Bar>
-"map <Left> <c-w>h<c-w>_<c-w><Bar>
-"map <Right> <c-w>l<c-w>_<c-w><Bar>
+"noremap <Up> <c-w>k<c-w>_<c-w><Bar>
+"noremap <Down> <c-w>j<c-w>_<c-w><Bar>
+"noremap <Left> <c-w>h<c-w>_<c-w><Bar>
+"noremap <Right> <c-w>l<c-w>_<c-w><Bar>
 
 " ~/.vimrc ends here
